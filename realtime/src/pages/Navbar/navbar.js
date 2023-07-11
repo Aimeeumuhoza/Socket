@@ -34,31 +34,25 @@ const Navbar = ({ socket }) => {
 
   return (
     <div className="navbar">
-    <span className="logo">Lama App</span>
-    <div className="icons">
-      <div className="icon" onClick={() => setOpen(!open)}>
-      <BsBell className="notification-icon" />
-        {
-notifications.length >0 &&
-          <div className="counter">{notifications.length}</div>
-        }
+      <span className="logo">chat</span>
+      <div className="icons">
+        <div className="icon" onClick={() => setOpen(!open)}>
+          <BsBell className="notification-icon" />
+          {notifications.length > 0 && (
+            <div className="counter">{notifications.length}</div>
+          )}
+        </div>
       </div>
-      <div className="icon" onClick={() => setOpen(!open)}>
-      <BsBell className="notification-icon" />
-      </div>
-      <div className="icon" onClick={() => setOpen(!open)}>
-      <BsBell className="notification-icon" />
-      </div>
+      {open && (
+        <div className="notifications">
+          {notifications.map((n) => displayNotification(n))}
+          <button className="nButton" onClick={handleRead}>
+            Mark as read
+          </button>
+        </div>
+      )}
     </div>
-    {open && (
-      <div className="notifications">
-        {notifications.map((n) => displayNotification(n))}
-        <button className="nButton" onClick={handleRead}>
-          Mark as read
-        </button>
-      </div>
-    )}
-  </div>
   );
 };
+
 export default Navbar;
